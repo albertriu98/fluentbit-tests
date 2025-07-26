@@ -8,3 +8,4 @@
         prepend_newline: true
         block: "{{ lookup('template', 'output_block.conf.j2') }}"
         create: true
+        marker: ""

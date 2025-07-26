@@ -30,16 +30,21 @@ pipeline{
         }
         stage ('Create output in fluentbit configuration file') {
             steps {
-                sh """
-                    cd fluentbit-tests/ansible  
-                    ansible-playbook playbook.yaml --extra-vars namespace=${name}
-                    cd ../
-                    git config user.name "Jenkins Bot"
-                    git config user.email "jenkins@yourdomain.com"
-                    git commit -am "Update fluentbit config , automated by Jenkins" 
-                    git push
-                    helm upgrade fluentbit -n fluentbit fluent/fluentbit --create-namespace --install --values fluentbit-config.conf 
-                  """
+                sshagent(['github-sshkey']) {
+                    sh """
+                        cd fluentbit-tests/ansible  
+                        ansible-playbook playbook.yaml --extra-vars namespace=${name}
+                        cd ../
+                        git config user.name "Jenkins Bot"
+                        git config user.email "jenkins@yourdomain.com"
+                        git commit -am "Update fluentbit config , automated by Jenkins"
+                        git push
+                        helm repo add fluent https://fluent.github.io/helm-charts 
+                        helm repo update
+                        helm upgrade fluentbit -n fluentbit fluent/fluent-bit --create-namespace --install --values fluentbit-config.conf 
+                    """
+                }
+                
             }
         }
     }

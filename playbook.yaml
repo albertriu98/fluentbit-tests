@@ -6,5 +6,5 @@
         path: ./fluentbit-tests/fluentbit-config.conf
         append_newline: true
         prepend_newline: true
-        block: "{{ lookup('template', './fluentbit-tests/output_block.conf.j2', convert_data=False) }}"
+        block: "{{ lookup('template', './fluentbit-tests/output_block.conf.j2') }}"
         create: true

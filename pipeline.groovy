@@ -31,7 +31,7 @@ pipeline{
         stage ('Create output in fluentbit configuration file') {
             steps {
                 sh('ls ./fluentbit-tests')
-                sh ('ansible-playbook ./fluentbit-tests/playbook.yaml --extra-vars namespace=${name}')
+                sh ('ansible-playbook ./fluentbit-tests/playbook.yaml --extra-vars namespace=${name} -vvvvv')
                 sh ('cd fluentbit-tests')
                 sh ('git commit -am "test" && git push')
                 sh ('helm upgrade fluentbit -n fluentbit fluent/fluentbit --create-namespace --install --values fluentbit-config.conf')

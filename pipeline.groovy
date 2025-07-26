@@ -30,6 +30,7 @@ pipeline{
         }
         stage ('Create output in fluentbit configuration file') {
             steps {
+                sh('ls ./fluentbit-tests')
                 sh ('ansible-playbook ./fluentbit-tests/playbook.yaml --extra-vars namespace=${name}')
                 sh ('cd fluentbit-tests')
                 sh ('git commit -am "test" && git push')

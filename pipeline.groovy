@@ -36,7 +36,7 @@ pipeline{
                     cd ../
                     git config user.name "Jenkins Bot"
                     git config user.email "jenkins@yourdomain.com"
-                    git commit -am "test" 
+                    git commit -am "Update fluentbit config , automated by Jenkins" 
                     git push
                     helm upgrade fluentbit -n fluentbit fluent/fluentbit --create-namespace --install --values fluentbit-config.conf 
                   """

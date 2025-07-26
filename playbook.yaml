@@ -1,0 +1,10 @@
+name: Add OUTPUT block to fluentbit configuration file
+hosts: localhost
+tasks:
+  - name: Add block
+    ansible.builtin.blockinfile:
+      path: ./fluentbit-tests/fluentbit-config.conf
+      append_newline: true
+      prepend_newline: true
+      block: "{{ lookup('template', './fluentbit-test/output_block.conf.j2') }}"
+      create: true

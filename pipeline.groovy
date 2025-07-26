@@ -11,7 +11,7 @@ pipeline{
     environment {
         GIT_SSH_COMMAND = 'ssh -o StrictHostKeyChecking=no'
     }
-    
+
     stages {
         stage ('Deploy app'){
             steps {
@@ -30,9 +30,9 @@ pipeline{
         }
         stage ('Create output in fluentbit configuration file') {
             steps {
-                sh ('git pull ')
-                sh ('ansible-playbook')
-                sh ('git commit -am  && git push')
+                sh ('ansible-playbook ./fluentbit-tests/playbook.yaml --extra-vars namespace=${name}')
+                sh ('cd fluentbit-tests')
+                sh ('git commit -am "test" && git push')
                 sh ('helm upgrade fluentbit -n fluentbit fluent/fluentbit --create-namespace --install --values fluentbit-config.conf')
                 
             }

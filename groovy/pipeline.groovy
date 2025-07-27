@@ -35,7 +35,7 @@ pipeline{
                     sh """
                         cd fluentbit-tests/ansible 
                         echo "$ANSIBLE_VAULT_PASS" > vault_pass.txt
-                        ansible-playbook playbook.yaml --extra-vars namespace=${name} --vault-password-file  vault_pass.txt"
+                        ansible-playbook playbook.yaml --extra-vars namespace=${name} --vault-password-file  vault_pass.txt
                         rm vault_pass.txt
                         cd ../
                         git config user.name "Jenkins Bot"

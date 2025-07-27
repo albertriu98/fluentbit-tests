@@ -1,0 +1,107 @@
+config:
+  parsers: |
+    [PARSER]
+        Name        docker
+        Format      json
+        Time_Key    timestamp
+        Time_Format %Y-%m-%dT%H:%M:%S %z
+  inputs: |
+    [INPUT]
+        Name   tail
+        Path   /var/log/containers/*.log
+        Tag    kube.*
+        parser docker
+
+  ## https://docs.fluentbit.io/manual/pipeline/filters
+  filters: |
+    [FILTER]
+        Name                kubernetes
+        Match               kube.*
+        Kube_URL            https://kubernetes.default.svc:443
+        Kube_CA_File        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
+        Kube_Tag_Prefix     kube.var.log.containers.
+        Merge_Log           On 
+    [FILTER]
+        Name           rewrite_tag
+        Match          kube.*
+        Rule           $kubernetes['namespace_name'] ^(.+)$  $1 false
+        Emitter_Name   re_emitter
+ 
+## https://docs.fluentbit.io/manual/pipeline/outputs
+  outputs: |
+    [OUTPUT]
+        Name               es
+        Match              nginx
+        Host               elasticsearch-es-http.elastic-stack.svc.cluster.local
+        tls                On
+        Port               9200
+        tls.verify         Off
+        suppress_type_name On
+        HTTP_user          elastic
+        HTTP_passwd        2Iiix3Qw99NzoMpXK23l4151
+        index              nginx
+    [OUTPUT]
+        Name               es
+        Match              fluentbit
+        Host               elasticsearch-es-http.elastic-stack.svc.cluster.local
+        tls                On
+        Port               9200
+        tls.verify         Off
+        suppress_type_name On
+        HTTP_user          elastic
+        HTTP_passwd        2Iiix3Qw99NzoMpXK23l4151
+        Index              fluentbit
+
+
+    [OUTPUT]
+        Name               es
+        Match              wedwedwcecer
+        Host               elasticsearch-es-http.elastic-stack.svc.cluster.local
+        tls                On
+        Port               9200
+        tls.verify         Off
+        suppress_type_name On
+        HTTP_user          elastic
+        HTTP_passwd        2Iiix3Qw99NzoMpXK23l4151
+        Index              wedwedwcecer
+
+
+    [OUTPUT]
+        Name               es
+        Match              wdfevrtg5tg
+        Host               elasticsearch-es-http.elastic-stack.svc.cluster.local
+        tls                On
+        Port               9200
+        tls.verify         Off
+        suppress_type_name On
+        HTTP_user          elastic
+        HTTP_passwd        2Iiix3Qw99NzoMpXK23l4151
+        Index              wdfevrtg5tg
+
+
+    [OUTPUT]
+        Name               es
+        Match              edewdffref
+        Host               elasticsearch-es-http.elastic-stack.svc.cluster.local
+        tls                On
+        Port               9200
+        tls.verify         Off
+        suppress_type_name On
+        HTTP_user          elastic
+        HTTP_passwd        2Iiix3Qw99NzoMpXK23l4151
+        Index              edewdffref
+
+
+    [OUTPUT]
+        Name               es
+        Match              qwdqwdqwed
+        Host               elasticsearch-es-http.elastic-stack.svc.cluster.local
+        tls                On
+        Port               9200
+        tls.verify         Off
+        suppress_type_name On
+        HTTP_user          elastic
+        HTTP_passwd        2Iiix3Qw99NzoMpXK23l4151
+        Index              qwdqwdqwed
+

@@ -5,7 +5,7 @@
   tasks:
     - name: Add block
       ansible.builtin.blockinfile:
-        path: ../fluentbit-config.conf
+        path: ../fluentbit-config.conf.yaml
         append_newline: true
         prepend_newline: true
         block: "{{ lookup('template', 'output_block.conf.j2') }}"

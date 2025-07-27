@@ -13,7 +13,7 @@ Challenges found:
 - Finally we develop the pipeline with groovy:
     1. Pipeline has 2 perameters: image and name.
     2. Pipeline uses kubectl to deploy a pod with the image defined in "image" parameter
-    3. Pipeline uses git to clone repository and from here using ansible playbook located in ansible/ modifies the file fluentbit-config.conf by appending template block ansible/templates/output_block.conf.j2
+    3. Pipeline uses git to clone repository and from here using ansible playbook located in ansible/ modifies the file fluentbit-config.conf.yaml by appending template block ansible/templates/output_block.conf.j2
     4. Once the file is modified and pushed back to origin, pipeline uses helm to upgrade the Chart of fluent-bit , adding the new configuration.
     5. When the deployed app starts generatic logs, those are collected and sent to a new elasticsearch index. So from there using kibana we can explore the logs and create useful dashboards.
 

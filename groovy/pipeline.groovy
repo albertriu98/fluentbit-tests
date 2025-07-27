@@ -44,7 +44,7 @@ pipeline{
                         git push
                         helm repo add fluent https://fluent.github.io/helm-charts 
                         helm repo update
-                        helm upgrade fluentbit -n fluentbit fluent/fluent-bit --create-namespace --install --values fluentbit-config.conf 
+                        helm upgrade fluentbit -n fluentbit fluent/fluent-bit --create-namespace --install --values fluentbit-config.conf.yaml
                     """
                 }
                 

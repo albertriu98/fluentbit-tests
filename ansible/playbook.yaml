@@ -1,5 +1,7 @@
 - name: Add OUTPUT block to fluentbit configuration file
   hosts: localhost
+  vars_files:
+    - secrets.yaml
   tasks:
     - name: Add block
       ansible.builtin.blockinfile:

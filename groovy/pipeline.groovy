@@ -33,8 +33,10 @@ pipeline{
             steps {
                 sshagent(['github-sshkey']) {
                     sh """
-                        cd fluentbit-tests/ansible  
-                        ansible-playbook playbook.yaml --extra-vars namespace=${name} --vault-password-file <\$(echo "$ANSIBLE_VAULT_PASS")
+                        cd fluentbit-tests/ansible 
+                        echo "$VAULT_PASSWORD" > vault_pass.txt
+                        ansible-playbook playbook.yaml --extra-vars namespace=${name} --vault-password-file < vault_pass.txt")
+                        rm vault_pass.txt
                         cd ../
                         git config user.name "Jenkins Bot"
                         git config user.email "jenkins@yourdomain.com"

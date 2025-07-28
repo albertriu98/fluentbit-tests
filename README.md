@@ -1,5 +1,7 @@
 What I want to do in this small project is to automate a simple deployment of a pod, defining the image and name off the app through parametersof the piepline, and then update the config of fluentbit deployed in the Kubernetes cluster to send logs from the app to a new index in elasticsearch.
 
+This is a POC project to test Fluentbit pipelines and apply them to real usecase of app deployment, not focusing on seurity, Jenkins administration ... Just testing minimal solution.
+
 Prerequisites:
 - Deploy a kubernetes cluster (minikube is OK)
 - Deploy elasticsearch, kibana and fluentd using official Helm Chart.

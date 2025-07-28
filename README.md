@@ -17,8 +17,11 @@ Challenges found:
     4. Once the file is modified and pushed back to origin, pipeline uses helm to upgrade the Chart of fluent-bit , adding the new configuration.
     5. When the deployed app starts generatic logs, those are collected and sent to a new elasticsearch index. So from there using kibana we can explore the logs and create useful dashboards.
 
-Note: Files in /manifests/roles are related to giving permissions to Jenkins Agent service account to create any object in the cluster.
-Note 2: To pull/push code from git repository I have used deploy key, uploaedd public key to the repo, and save private key as an ssh key secret in jenkins. Then using sshagent plugin I can use the key in the piepline. For the Jenkins side, striictHostChecking has been disabled.
+**Note**: Files in /manifests/roles are related to giving permissions to Jenkins Agent service account to create any object in the cluster.
+
+**Note 2**: To pull/push code from git repository I have used deploy key, uploaedd public key to the repo, and save private key as an ssh key secret in jenkins. Then using sshagent plugin I can use the key in the piepline. For the Jenkins side, striictHostChecking has been disabled.
+
+**Note 3**: I am using ansible vault to store securely elasticsearch credentials
 
 Charts: 
 - FLuentbit: https://fluent.github.io/helm-charts/fluent-bit

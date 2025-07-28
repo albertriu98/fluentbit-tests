@@ -34,7 +34,6 @@ config:
         Match          kube.*
         Rule           $kubernetes['namespace_name'] ^(.+)$  $1 false
         Emitter_Name   re_emitter
-
     [FILTER]
         Name   parser
         Match  nginx*

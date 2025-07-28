@@ -8,10 +8,9 @@ config:
     [PARSER]
         Name   nginx
         Format regex
-        Regex  ^(?<host>[^ ]*) [^ ]* (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*?)(?: +\S*)?)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$
-        Time_Key time
+        Regex       ^(?<remote>[^ ]*) (?<ident>[^ ]*) (?<auth>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>[A-Z]+) (?<uri>[^ ]+) (?<protocol>[^"]+)" (?<status>\d{3}) (?<bytes>\d+) "(?<referrer>[^"]*)" "(?<agent>[^"]*)" "(?<x_forwarded_for>[^"]*)"
+        Time_Key    time
         Time_Format %d/%b/%Y:%H:%M:%S %z
-        Types code:integer size:integer
 
   inputs: |
     [INPUT]
